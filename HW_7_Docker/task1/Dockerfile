@@ -6,7 +6,7 @@ WORKDIR /app
 COPY main.go .
 
 # Сборка бинарника в /bin/web
-RUN go build -o /bin/web ./main.go
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /bin/web ./main.go
 
 # Финальный минимальный образ
 FROM alpine:latest
