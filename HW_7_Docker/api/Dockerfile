@@ -18,8 +18,8 @@ RUN cd /go-app/cmd/demo/ && \
 FROM golang:1.21.5-alpine3.19
 
 # Правильное объявление переменных окружения
-ENV API_PORT="${API_PORT}" \
-    DB_URL="${DB_URL}"
+#ENV API_PORT="${API_PORT}" \
+#    DB_URL="${DB_URL}"
 
 COPY --from=builder /bin/go-app /bin/go-app
 RUN chmod +x /bin/go-app
