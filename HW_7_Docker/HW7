@@ -28,7 +28,7 @@ Dockerfile
 ## Задание:
 Задание 1
 ```bash
-cd task1
+cd Lesta/HW_7_Docker/task1
 # Построить образ с тегом:
 docker build -t lesta-start:7.1 .
 # Запустить контейнер:
@@ -38,7 +38,7 @@ docker run -d -p 8080:8080 --name lesta-web lesta-start:7.1
 [alt text](image.png)
 Задание 2
 ```bash
-cd task2
+cd Lesta/HW_7_Docker/api
 # Построить образ с тегом:
 docker-compose up --build
 # http://localhost:8088/swagger/index.html
