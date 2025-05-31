@@ -14,7 +14,9 @@ echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" 
 sudo apt update
 sudo apt install -y postgresql-16
 ```
+
 ![alt text](image.png)
+
 2)Создание пользователя ubuntu с правами SUPERUSER в PostgreSQL
 
 ```bash
@@ -32,11 +34,14 @@ sudo usermod -aG sudo ubuntu
 
 su - ubuntu
 ```
+
 4. Загрузка дампа demo-big.zip, распаковка и восстановление в БД
 ```bash
 rsync -avzP -e "ssh -i /Users/s.selivonchik/Downloads/private.key -p 22" demo-big.zip ubuntu@37.9.53.82:/tmp
 ```
+
 ![alt text](image-1.png)
+
 
 ```bash
 # расспаковка и восстановление дампа
@@ -63,17 +68,20 @@ SELECT pg_reload_conf();
 # Проверь, применилось ли:
 SHOW work_mem;
 ```
+
 ![alt text](image-2.png)
+
 ```bash
 psql -l 
 ```
+
 ![alt text](image-3.png)
+
 ```bash
 sudo -u postgres psql -d demo
 \dt+
 ```
 ![alt text](image-4.png)
-
 
 ## Решение TASK2
  
