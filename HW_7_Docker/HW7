@@ -45,5 +45,8 @@ docker-compose up --build
 #Ты должен увидеть Swagger UI, и возможность выполнить:
 #POST /api/throw
 #GET /api/stats
+
 ```
-[alt text](image2.png)
+# дополнительно настроил nginx на vm ,для проксирования трафика с http://37.9.53.82/swagger/index.html на http://localhost:8088/swagger/index.html
+[alt text](image1.png)
+[alt text](image3.png)
