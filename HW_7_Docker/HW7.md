@@ -35,7 +35,8 @@ docker build -t lesta-start:7.1 .
 docker run -d -p 8080:8080 --name lesta-web lesta-start:7.1
 # Приложение будет доступно по адресу: http://localhost:8080
 ```
-[alt text](image.png)
+![alt text](image.png)
+
 Задание 2
 ```bash
 cd Lesta/HW_7_Docker/api
@@ -48,5 +49,5 @@ docker-compose up --build
 
 ```
 # дополнительно настроил nginx на vm ,для проксирования трафика с http://37.9.53.82/swagger/index.html на http://localhost:8088/swagger/index.html
-[alt text](image1.png)
-[alt text](image3.png)
+![alt text](image1.jpg)
+![alt text](image3.jpg)
