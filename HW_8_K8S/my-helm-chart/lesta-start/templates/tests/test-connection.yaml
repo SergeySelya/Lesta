@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "lesta-start.fullname" . }}-test-connection"
+  labels:
+    {{- include "lesta-start.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "lesta-start.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
