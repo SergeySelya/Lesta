@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: lesta-start
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: lesta-start
+  template:
+    metadata:
+      labels:
+        app: lesta-start
+    spec:
+      containers:
+        - name: lesta-start
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: API_PORT
+              value: {{ .Values.env.API_PORT | quote }}
+            - name: DB_URL
+              value: {{ .Values.env.DB_URL | quote }}
