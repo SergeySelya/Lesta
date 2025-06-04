@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lesta-start
+  labels:
+    app: lesta-start
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: lesta-start
+  template:
+    metadata:
+      labels:
+        app: lesta-start
+    spec:
+      containers:
+      - name: lesta-start
+        image: lesta-start:7.1
+        ports:
+        - containerPort: 8887
+        env:
+        - name: API_PORT
+          value: "8887"
+        - name: DB_URL
+          value: "postgres://USER_DB:PWD_DB@postgres-service:5432/DB"
