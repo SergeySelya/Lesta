@@ -1,0 +1,33 @@
+replicaCount: 2
+
+image:
+  repository: lesta-start
+  tag: "7.1"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8887
+
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  host: lesta.example.com
+  path: /
+  pathType: Prefix
+
+env:
+  API_PORT: "8887"
+  DB_URL: "postgres://USER_DB:PWD_DB@postgres-service:5432/DB"
+
+serviceAccount:
+  create: false
+  name: ""
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
