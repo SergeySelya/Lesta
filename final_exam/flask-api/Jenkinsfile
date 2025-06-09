@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = "yourdockerhubusername/flask-api:latest"
+        DOCKER_REGISTRY = "docker.io"
+        DOCKER_USERNAME = credentials('dockerhub-username-id')
+        DOCKER_PASSWORD = credentials('dockerhub-password-id')
+        DEPLOY_HOST = 'user@remote.server'          // SSH доступ к серверу
+        DEPLOY_PATH = '/path/to/flask-api'           // Путь, где на сервере лежит docker-compose.yml
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh "docker build -t $DOCKER_IMAGE ."
+            }
+        }
+
+        stage('Test/Lint') {
+            steps {
+                sh "flake8 app"
+            }
+        }
+
+        stage('Push') {
+            steps {
+                sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin $DOCKER_REGISTRY"
+                sh "docker push $DOCKER_IMAGE"
+                sh "docker logout $DOCKER_REGISTRY"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sshagent(['your-ssh-credentials-id']) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no $DEPLOY_HOST << EOF
+                      cd $DEPLOY_PATH
+                      docker-compose pull
+                      docker-compose up -d --build
+                    EOF
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            sh "docker image rm $DOCKER_IMAGE || true"
+        }
+    }
+}
