@@ -24,8 +24,8 @@ pipeline {
                         scp -r flask-api ${REMOTE_HOST}:${REMOTE_APP_DIR}
                         ssh ${REMOTE_HOST} '
                             cd ${REMOTE_APP_DIR}
-                            docker-compose down || true
-                            docker-compose up -d
+                            sudo docker-compose down || true
+                            sudo docker-compose up -d
                         '
                     """
                 }
