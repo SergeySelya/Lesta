@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         REMOTE_HOST = 'ubuntu@37.9.53.243'
-        SSH_KEY_ID = 'remote-ssh-key'  // ID ключа Jenkins с SSH приватным ключом
+        SSH_KEY_ID = '81ed1bb7-4436-4b6c-b4d2-bbc8ed15b8c0'  // ID ключа Jenkins с SSH приватным ключом
         REMOTE_APP_DIR = '/home/ubuntu/flask-api'  // Куда будет копироваться проект
     }
 
